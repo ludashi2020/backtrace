@@ -4,10 +4,10 @@
 
 
 ## 三网回程路由测试
-![](https://raw.githubusercontent.com/zhanghanyun/backtrace/main/assets/test.png)
+![](https://raw.githubusercontent.com/ludashi2020/backtrace/main/assets/test.png)
 
 ## 使用
 终端下运行
 ```shell
-curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
+curl https://raw.githubusercontent.com/ludashi2020/backtrace/main/install.sh -sSf | sh
 ```
