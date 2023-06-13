@@ -49,6 +49,10 @@ func trace(ch chan Result, i int) {
 }
 
 func ipAsn(ip string) string {
+	if isInIPRanges(ip) {
+		return "AS58807"
+	}
+
 	switch {
 	case strings.HasPrefix(ip, "59.43"):
 		return "AS4809"
@@ -58,11 +62,46 @@ func ipAsn(ip string) string {
 		return "AS9929"
 	case strings.HasPrefix(ip, "219.158"):
 		return "AS4837"
-	case strings.HasPrefix(ip, "223.119.8"), strings.HasPrefix(ip, "223.119.32"), strings.HasPrefix(ip, "223.119.34"), strings.HasPrefix(ip, "223.119.35"), strings.HasPrefix(ip, "223.119.36"), strings.HasPrefix(ip, "223.119.37"), strings.HasPrefix(ip, "223.119.100"), strings.HasPrefix(ip, "223.120.128"), strings.HasPrefix(ip, "223.120.134"), strings.HasPrefix(ip, "223.120.138"), strings.HasPrefix(ip, "223.120.158"), strings.HasPrefix(ip, "223.120.164"), strings.HasPrefix(ip, "223.120.165"), strings.HasPrefix(ip, "223.120.168"), strings.HasPrefix(ip, "223.120.172"), strings.HasPrefix(ip, "223.120.174"), strings.HasPrefix(ip, "223.120.184"), strings.HasPrefix(ip, "223.120.188"), strings.HasPrefix(ip, "223.120.192"), strings.HasPrefix(ip, "223.120.200"), strings.HasPrefix(ip, "223.120.210"), strings.HasPrefix(ip, "223.120.212"), strings.HasPrefix(ip, "223.121.128"), strings.HasPrefix(ip, "223.121.164"):
-		return "AS58807"
 	case strings.HasPrefix(ip, "223.118"), strings.HasPrefix(ip, "223.119"), strings.HasPrefix(ip, "223.120"), strings.HasPrefix(ip, "223.121"):
 		return "AS58453"
 	default:
 		return ""
 	}
+}
+
+func isInIPRanges(ip string) bool {
+	ipRanges := []string{
+		"223.120.128.0/17",
+		"223.120.134.0/23",
+		"223.120.138.0/23",
+		"223.120.158.0/23",
+		"223.120.164.0/22",
+		"223.120.168.0/22",
+		"223.120.172.0/22",
+		"223.120.174.0/23",
+		"223.120.184.0/22",
+		"223.120.188.0/22",
+		"223.120.192.0/23",
+		"223.120.200.0/23",
+		"223.120.210.0/23",
+		"223.120.212.0/23",
+	}
+
+	parsedIP := net.ParseIP(ip)
+	if parsedIP == nil {
+		return false
+	}
+
+	for _, ipRange := range ipRanges {
+		_, subnet, err := net.ParseCIDR(ipRange)
+		if err != nil {
+			continue
+		}
+
+		if subnet.Contains(parsedIP) {
+			return true
+		}
+	}
+
+	return false
 }
