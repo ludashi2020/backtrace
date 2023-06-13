@@ -49,23 +49,19 @@ func trace(ch chan Result, i int) {
 }
 
 func ipAsn(ip string) string {
-
 	switch {
 	case strings.HasPrefix(ip, "59.43"):
 		return "AS4809"
 	case strings.HasPrefix(ip, "202.97"):
 		return "AS4134"
-	case strings.HasPrefix(ip, "218.105") || strings.HasPrefix(ip, "210.51"):
+	case strings.HasPrefix(ip, "218.105"), strings.HasPrefix(ip, "210.51"):
 		return "AS9929"
 	case strings.HasPrefix(ip, "219.158"):
 		return "AS4837"
-	case strings.HasPrefix(ip, "223.119.8") || strings.HasPrefix(ip, "223.119.32") || strings.HasPrefix(ip, "223.119.34") || strings.HasPrefix(ip, "223.119.35") || strings.HasPrefix(ip, "223.119.36") || strings.HasPrefix(ip, "223.119.37") || strings.HasPrefix(ip, "223.119.100") || strings.HasPrefix(ip, "223.120.128") || strings.HasPrefix(ip, "223.120.134") || strings.HasPrefix(ip, "223.120.138") || strings.HasPrefix(ip, "223.120.158") || strings.HasPrefix(ip, "223.120.164") || strings.HasPrefix(ip, "223.120.165") || strings.HasPrefix(ip, "223.120.168") || strings.HasPrefix(ip, "223.120.172") || strings.HasPrefix(ip, "223.120.174") || strings.HasPrefix(ip, "223.120.184") || strings.HasPrefix(ip, "223.120.188") || strings.HasPrefix(ip, "223.120.192") || strings.HasPrefix(ip, "223.120.200") || strings.HasPrefix(ip, "223.120.210") || strings.HasPrefix(ip, "223.120.212"):
-		return "AS58807"		
-	case strings.HasPrefix(ip, "223.121.128") || strings.HasPrefix(ip, "223.121.164"):
+	case strings.HasPrefix(ip, "223.119.8"), strings.HasPrefix(ip, "223.119.32"), strings.HasPrefix(ip, "223.119.34"), strings.HasPrefix(ip, "223.119.35"), strings.HasPrefix(ip, "223.119.36"), strings.HasPrefix(ip, "223.119.37"), strings.HasPrefix(ip, "223.119.100"), strings.HasPrefix(ip, "223.120.128"), strings.HasPrefix(ip, "223.120.134"), strings.HasPrefix(ip, "223.120.138"), strings.HasPrefix(ip, "223.120.158"), strings.HasPrefix(ip, "223.120.164"), strings.HasPrefix(ip, "223.120.165"), strings.HasPrefix(ip, "223.120.168"), strings.HasPrefix(ip, "223.120.172"), strings.HasPrefix(ip, "223.120.174"), strings.HasPrefix(ip, "223.120.184"), strings.HasPrefix(ip, "223.120.188"), strings.HasPrefix(ip, "223.120.192"), strings.HasPrefix(ip, "223.120.200"), strings.HasPrefix(ip, "223.120.210"), strings.HasPrefix(ip, "223.120.212"), strings.HasPrefix(ip, "223.121.128"), strings.HasPrefix(ip, "223.121.164"):
 		return "AS58807"
-	case strings.HasPrefix(ip, "223.118") || strings.HasPrefix(ip, "223.119") || strings.HasPrefix(ip, "223.121"):
+	case strings.HasPrefix(ip, "223.118"), strings.HasPrefix(ip, "223.119"), strings.HasPrefix(ip, "223.120"), strings.HasPrefix(ip, "223.121"):
 		return "AS58453"
-
 	default:
 		return ""
 	}
