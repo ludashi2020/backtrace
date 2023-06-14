@@ -20,7 +20,6 @@ var (
 )
 
 func trace(ch chan Result, i int) {
-
 	hops, err := Trace(net.ParseIP(rIp[i]))
 	if err != nil {
 		s := fmt.Sprintf("%v %-15s %v", rName[i], rIp[i], err)
@@ -35,12 +34,16 @@ func trace(ch chan Result, i int) {
 				continue
 			} else {
 				as := m[asn]
-				cai := i % 6
-				c := color.New(ca[cai]).Add(color.Bold).SprintFunc()
-				s := fmt.Sprintf("%v %-15s %-23s", rName[i], rIp[i], c(as))
+				var c *color.Color
+				if strings.Contains(as, "[优质线路]") {
+					c = color.New(color.FgHiGreen).Add(color.Bold)
+				} else {
+					c = color.New(color.FgHiYellow).Add(color.Bold)
+				}
+				s := fmt.Sprintf("%v %-15s %-23s", rName[i], rIp[i], c.Sprint(as))
 				ch <- Result{i, s}
 				return
-			}
+				}
 		}
 	}
 
